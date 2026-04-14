@@ -8,4 +8,3 @@ lora_weights/
 *.bin
 *.safetensors
 data/placeholder.jpg
-*.png
