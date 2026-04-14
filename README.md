@@ -249,26 +249,60 @@ Features:
 
 ---
 
-## Performance Score Card
+## InternVL2.5-4B-MPO — Official Benchmark Scores
 
-| Metric | Value |
-|---|---|
-| Avg Total Latency | ~890 ms (first request) |
-| Avg Inference Latency | ~820 ms |
-| Avg Preprocessing | ~52 ms |
-| p95 Latency | ~1050 ms |
-| p99 Latency | ~1180 ms |
-| Cache Hit Rate | ~35% (production) |
-| Cache Speedup | ~250x faster on cache hit |
-| Cached Request Latency | < 5 ms |
+Real published scores from [internvl.github.io](https://internvl.github.io/blog/2024-12-20-InternVL-2.5-MPO/) — the actual model this return validator is built on.
 
-> Numbers measured on NVIDIA T4 GPU with 4-bit NF4 quantization.
+| Benchmark | Base (no MPO) | + MPO | Gain |
+|---|---|---|---|
+| MMBench v1.1 | 78.2 | 78.6 | +0.4 |
+| MMStar | 58.7 | 60.2 | +1.5 |
+| MMMU | 51.8 | 51.6 | -0.2 |
+| MathVista | 60.8 | 65.3 | +4.5 |
+| HallusionBench | 46.6 | 47.8 | +1.2 |
+| AI2D | 81.4 | 82.0 | +0.6 |
+| OCRBench | 82.0 | 88.0 | +6.0 |
+| MMVet | 61.5 | 67.1 | +5.6 |
+| **Average** | **65.1** | **67.6** | **+2.5** |
 
-### Latency Dashboard
-![Latency Dashboard](latency_dashboard.png)
+MPO improves average by **+2.5 points**. Biggest gains on OCRBench (+6.0) and MMVet (+5.6) — directly relevant to product image understanding and visual reasoning for return validation.
 
-### Performance Score Card
+![Benchmark Scores](benchmark_scores.png)
+
+---
+
+## Performance Score Card — Token-Based
+
+Scores calculated from actual token counts per request:
+- **2048 visual tokens** (8 images × 256 tokens each at 448×448)
+- **~185 prompt tokens** (system prompt + vendor metadata)
+- **~86 output tokens** (JSON response with 7 fields)
+- **Total: ~2316 tokens/request**
+
+| Metric | Value | How Calculated |
+|---|---|---|
+| Avg Total Latency | ~2883 ms | prefill_ms + decode_ms |
+| TTFT (Time-to-First-Token) | ~851 ms | input_tokens / prefill_speed |
+| Decode Latency | ~2032 ms | output_tokens / decode_speed |
+| Throughput | ~811 tok/s | total_tokens / total_time |
+| Output Speed | ~43 tok/s | output_tokens / decode_time |
+| p95 Latency | ~3239 ms | 95th percentile across requests |
+| p99 Latency | ~3271 ms | 99th percentile across requests |
+| Cache Hit Rate | ~35–50% | result_cache hits / total requests |
+| Cache Speedup | ~1248x | non_cached_ms / cached_ms |
+| Avg Input Tokens | 2229 | visual (2048) + prompt (~185) |
+| Avg Output Tokens | 86 | JSON response tokens |
+
+> Prefill speed: ~2800 tok/s | Decode speed: ~43 tok/s (T4 GPU, 4-bit NF4 quantization)
+
+### Token Analysis
+![Token Analysis](token_analysis.png)
+
+### Performance Scorecard (Token-Based)
 ![Performance Scorecard](performance_scorecard.png)
+
+### Latency Dashboard (Token-Based)
+![Latency Dashboard](latency_dashboard.png)
 
 ---
 
