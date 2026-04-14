@@ -178,19 +178,6 @@ python inference.py
 
 ---
 
-## UI Screenshots
-
-### View 1 — Input: Upload Images & Metadata
-![Input View](screenshots/01_input_view.png)
-
-### View 2 — Processing: Pipeline Stages with GPU Optimization
-![Processing View](screenshots/02_processing_view.png)
-
-### View 3 — Output: Validation Result, JSON & Latency Metrics
-![Output View](screenshots/03_output_view.png)
-
----
-
 ## Performance Optimizations
 
 ### End-to-End Latency Tracking
@@ -298,11 +285,11 @@ Scores calculated from actual token counts per request:
 ### Token Analysis
 ![Token Analysis](token_analysis.png)
 
-### Performance Scorecard (Token-Based)
-![Performance Scorecard](performance_scorecard.png)
-
 ### Latency Dashboard (Token-Based)
 ![Latency Dashboard](latency_dashboard.png)
+
+### Performance Scorecard (Token-Based)
+![Performance Scorecard](performance_scorecard.png)
 
 ---
 
@@ -383,57 +370,26 @@ print(result)
 ## Visual Results & Improvements
 
 ### Validation Logic Gate
-> How the 6 binary fields combine to produce the final accept/reject decision.
-
 ![Validation Logic](validation_logic.png)
 
----
-
 ### Per-Field Metrics — F1, Precision, Recall
-> Each of the 7 validation fields evaluated independently.
-
 ![Field Metrics](field_metrics.png)
 
----
-
 ### accept_return Confusion Matrix
-> True/False positives and negatives for the final return decision.
-
 ![Confusion Matrix](confusion_matrix.png)
 
----
-
 ### Hallucination Heatmap
-> Ground Truth vs Predictions vs Errors — TC006 shows the hallucination case where model accepted despite quantity fraud.
+> TC006 shows the hallucination case — model accepted despite quantity fraud.
 
 ![Hallucination Heatmap](hallucination_heatmap.png)
 
----
-
-### Latency Dashboard
-> Per-request breakdown (preprocessing / inference / post-processing), distribution, time share, and cache impact.
-
-![Latency Dashboard](latency_dashboard.png)
-
----
-
-### Performance Score Card
-> 8 key metrics: avg latency, p95/p99, cache hit rate, speedup.
-
-![Performance Scorecard](performance_scorecard.png)
-
----
-
 ### UI Screenshots
 
-**View 1 — Input: Upload delivery & vendor images with metadata**
-
+**View 1 — Input**
 ![Input View](screenshots/01_input_view.png)
 
-**View 2 — Processing: Pipeline stages with GPU optimization**
-
+**View 2 — Processing**
 ![Processing View](screenshots/02_processing_view.png)
 
-**View 3 — Output: Validation result, JSON output & latency breakdown**
-
+**View 3 — Output**
 ![Output View](screenshots/03_output_view.png)
