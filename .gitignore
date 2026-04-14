@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pyo
+.env
+venv/
+lora_weights/
+*.pt
+*.bin
+*.safetensors
+data/placeholder.jpg
+*.png
